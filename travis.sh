@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+./scripts/setupRamdisk.sh
+
 function installPhantomJs {
   echo "Setup PhantomJS 2.1"
   mkdir -p ~/phantomjs
@@ -112,7 +114,7 @@ function fixBuildVersion {
 # Configure Maven settings and install some script utilities
 #
 function configureTravis {
-  mkdir ~/.local
+  mkdir -p ~/.local
   curl -sSL https://github.com/SonarSource/travis-utils/tarball/v35 | tar zx --strip-components 1 -C ~/.local
   source ~/.local/bin/install
 }
