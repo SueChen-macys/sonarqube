@@ -151,12 +151,14 @@ BUILD)
     # For this reason errors are ignored with "|| true"
     git fetch --unshallow || true
 
-    mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar \
+    mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy \
           $MAVEN_ARGS \
-          -Pdeploy-sonarsource,release \
+          -Pdeploy-sonarsource,release
+    mvn sonar:sonar \
           -Dsonar.host.url=$SONAR_HOST_URL \
           -Dsonar.login=$SONAR_TOKEN \
           -Dsonar.projectVersion=$INITIAL_VERSION
+
 
   elif [[ "$TRAVIS_BRANCH" == "branch-"* ]] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo 'Build release branch'
@@ -166,10 +168,11 @@ BUILD)
   elif [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ -n "${GITHUB_TOKEN:-}" ]; then
     echo 'Build and analyze internal pull request'
 
-    mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar \
+    mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy \
         $MAVEN_ARGS \
         -Dsource.skip=true \
-        -Pdeploy-sonarsource \
+        -Pdeploy-sonarsource
+    mvn sonar:sonar \
         -Dsonar.analysis.mode=preview \
         -Dsonar.github.pullRequest=$TRAVIS_PULL_REQUEST \
         -Dsonar.github.repository=$TRAVIS_REPO_SLUG \
