@@ -33,6 +33,7 @@ function installJdk8 {
     wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
     tar xzf jdk-8u131-linux-x64.tar.gz
     rm jdk-8u131-linux-x64.tar.gz
+    echo "JDK8 installed"
   fi
   popd > /dev/null
   export JAVA_HOME=~/jvm/jdk1.8.0_131
@@ -46,6 +47,7 @@ function installMaven {
   if [ ! -d "apache-maven-3.3.9" ]; then
     echo "Download Maven 3.3.9"
     curl -SL http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar zx -C ~/maven
+    echo "Maven installed"
   fi
   popd > /dev/null
   export M2_HOME=~/maven/apache-maven-3.3.9
@@ -81,8 +83,10 @@ function installMaven {
 # PROJECT_VERSION=6.3
 #
 function fixBuildVersion {
+  echo 'fixBuildVersion...'
   export INITIAL_VERSION=`maven_expression "project.version"`
 
+  echo 'fixBuildVersion[remove suffix]...'
   # remove suffix -SNAPSHOT or -RC
   without_suffix=`echo $INITIAL_VERSION | sed "s/-.*//g"`
 
@@ -95,6 +99,7 @@ function fixBuildVersion {
     export BUILD_VERSION="$without_suffix.$TRAVIS_BUILD_NUMBER"
   fi
 
+  echo 'fixBuildVersion[mvn]...'
   if [[ "${INITIAL_VERSION}" == *"-SNAPSHOT" ]]; then
     # SNAPSHOT
     export PROJECT_VERSION=$BUILD_VERSION
