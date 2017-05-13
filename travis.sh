@@ -1,14 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-sudo add-apt-repository ppa:openjdk-r/ppa -y
-sudo apt-get update -q
-sudo apt-get install openjdk-8-jdk -y
-
-java -version
-which java
-
-#./scripts/setupRamdisk.sh
+./scripts/setupRamdisk.sh
 
 function installPhantomJs {
   echo "Setup PhantomJS 2.1"
@@ -46,9 +39,6 @@ function installJdk8 {
   export PATH=$JAVA_HOME/bin:$PATH
 }
 
-#
-# Maven 3.2.5 is installed by default on Travis. Maven 3.3.9 is preferred.
-#
 function installMaven {
   echo "Setup Maven"
   mkdir -p ~/maven
@@ -141,11 +131,9 @@ BUILD)
   ./clock.sh &
 
   # no need to install java 8, default installation is up-to-date on trusty
-  #installJdk8
+  installJdk8
   installMaven
   fixBuildVersion
-
-  mvn --version
 
   # Minimal Maven settings
   export MAVEN_OPTS="-Xmx1G -Xms128m"
