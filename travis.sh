@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+apt-get update
+apt-get install openjdk-8-jdk
+
 java -version
 which java
 
