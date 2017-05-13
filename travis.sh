@@ -133,7 +133,8 @@ BUILD)
   # That can occur when uploading sonarqube.zip to Artifactory.
   ./clock.sh &
 
-  installJdk8
+  # no need to install java 8, default installation is up-to-date on trusty
+  #installJdk8
   installMaven
   fixBuildVersion
 
