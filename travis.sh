@@ -1,7 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-./scripts/setupRamdisk.sh
+java -version
+which java
+
+#./scripts/setupRamdisk.sh
 
 function installPhantomJs {
   echo "Setup PhantomJS 2.1"
@@ -137,6 +140,8 @@ BUILD)
   #installJdk8
   installMaven
   fixBuildVersion
+
+  mvn --version
 
   # Minimal Maven settings
   export MAVEN_OPTS="-Xmx1G -Xms128m"
