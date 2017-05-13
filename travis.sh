@@ -1,7 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-sudo apt-get -qq update
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get update
 sudo apt-get install -y openjdk-8-jdk
 
 java -version
