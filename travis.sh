@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-./scripts/setupRamdisk.sh
+#./scripts/setupRamdisk.sh
 
 function installPhantomJs {
   echo "Setup PhantomJS 2.1"
@@ -45,11 +45,12 @@ function installMaven {
   pushd ~/maven > /dev/null
   if [ ! -d "apache-maven-3.3.9" ]; then
     echo "Download Maven 3.3.9"
-    curl -sSL http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar zx -C ~/maven
+    curl -SL http://apache.mirrors.ovh.net/ftp.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar zx -C ~/maven
   fi
   popd > /dev/null
   export M2_HOME=~/maven/apache-maven-3.3.9
   export PATH=$M2_HOME/bin:$PATH
+  mvn -v
 }
 
 #
