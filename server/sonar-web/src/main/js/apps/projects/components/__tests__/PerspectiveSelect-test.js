@@ -17,34 +17,27 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-// @flow
 import React from 'react';
-import RadioToggle from '../../../components/controls/RadioToggle';
-import { translate } from '../../../helpers/l10n';
+import { shallow } from 'enzyme';
+import PerspectiveSelect from '../PerspectiveSelect';
 
-export default class ViewSelect extends React.PureComponent {
-  props: {
-    onChange: string => void,
-    view: string
-  };
+it('should render correctly', () => {
+  expect(shallow(<PerspectiveSelect view="overall" />)).toMatchSnapshot();
+});
 
-  handleChange = (view: string) => {
-    this.props.onChange(view);
-  };
+it('should render with coverage selected', () => {
+  expect(
+    shallow(<PerspectiveSelect view="visualizations" visualization="coverage" />)
+  ).toMatchSnapshot();
+});
 
-  render() {
-    const options = ['list', 'visualizations'].map(option => ({
-      value: option,
-      label: translate('projects.view', option)
-    }));
-
-    return (
-      <RadioToggle
-        name="view"
-        onCheck={this.handleChange}
-        options={options}
-        value={this.props.view}
-      />
-    );
-  }
-}
+it('should handle perspective change correctly', () => {
+  const onChange = jest.fn();
+  const instance = shallow(
+    <PerspectiveSelect view="visualizations" visualization="coverage" onChange={onChange} />
+  ).instance();
+  instance.handleChange({ value: 'overall', type: 'view' });
+  instance.handleChange({ value: 'leak', type: 'view' });
+  instance.handleChange({ value: 'coverage', type: 'visualization' });
+  expect(onChange.mock.calls).toMatchSnapshot();
+});

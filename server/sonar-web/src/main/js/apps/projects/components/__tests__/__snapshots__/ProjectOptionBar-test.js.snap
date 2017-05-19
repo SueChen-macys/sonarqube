@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should call the open and close method correctly 1`] = `
+Array [
+  Array [
+    true,
+  ],
+]
+`;
+
+exports[`should call the open and close method correctly 2`] = `
+Array [
+  Array [
+    true,
+  ],
+  Array [
+    false,
+  ],
+]
+`;
+
+exports[`should render option bar closed 1`] = `
+<div
+  className="projects-topbar"
+>
+  <a
+    className="button projects-topbar-open"
+    href="#"
+    onClick={[Function]}
+  >
+    projects.view_settings
+  </a>
+  <div
+    className="projects-topbar-actions"
+  >
+    <a
+      className="projects-topbar-button projects-topbar-button-close"
+      href="#"
+      onClick={[Function]}
+    >
+      <i
+        className="icon-close"
+      />
+    </a>
+    <div
+      className="projects-topbar-actions-inner"
+    >
+      <PerspectiveSelect
+        view="overall"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should render option bar open 1`] = `
+<div
+  className="projects-topbar"
+>
+  <a
+    className="button projects-topbar-open"
+    href="#"
+    onClick={[Function]}
+  >
+    projects.view_settings
+  </a>
+  <div
+    className="projects-topbar-actions open"
+  >
+    <a
+      className="projects-topbar-button projects-topbar-button-close"
+      href="#"
+      onClick={[Function]}
+    >
+      <i
+        className="icon-close"
+      />
+    </a>
+    <div
+      className="projects-topbar-actions-inner"
+    >
+      <PerspectiveSelect
+        view="visualizations"
+        visualization="coverage"
+      />
+    </div>
+  </div>
+</div>
+`;
